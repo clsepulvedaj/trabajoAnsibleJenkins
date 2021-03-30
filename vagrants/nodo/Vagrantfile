@@ -1,0 +1,30 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+ 
+
+
+VAGRANTFILE_API_VERSION = "2"
+
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.define "node-uno" do |nodo1|
+    nodo1.vm.box = "bento/ubuntu-16.04"
+    nodo1.vm.network "private_network", ip: "192.168.33.11"
+    nodo1.vm.synced_folder "shared", "/shared"
+    nodo1.vm.hostname = "node1"
+    nodo1.vm.provider "virtualbox" do |v|
+      v.memory = 512
+      v.cpus = 1
+    end
+  end 
+  config.vm.define "node-dos" do |nodo2|
+    nodo2.vm.box = "bento/ubuntu-16.04"
+    nodo2.vm.network "private_network", ip: "192.168.33.12"
+    nodo2.vm.hostname = "node2"
+    nodo2.vm.synced_folder "shared", "/shared"
+    nodo2.vm.provider "virtualbox" do |v|
+      v.memory = 512
+      v.cpus = 1
+    end
+  end 
+end

@@ -1,0 +1,14 @@
+---
+- hosts: 192.168.33.11
+  remote_user: root
+  tasks:
+    - name: Instalar Java y Jenkins
+      shell: /shared/instalar_jenkins.sh
+    - name: Leer Jenkins Key
+      command: cat /var/lib/jenkins/secret.key
+      register: command_output
+    - name: Imprimir key de Jenkins
+      debug:
+        msg: "La llave de Jenkins es: {{command_output.stdout}}"
+
+
